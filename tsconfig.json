@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "declaration": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "ES2020",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": ["node", "mocha", "jest"],
+        "skipLibCheck": true,
+        "preserveSymlinks": true,
+        "pretty": true,
+        "composite": true,
+        "outDir": "./dist/js",
+        "experimentalDecorators": true
+    },
+    "include": ["./src/**/*", "ormconfig.json"]
+}
