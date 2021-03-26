@@ -1,11 +1,10 @@
 FROM node:14-alpine
 
-ARG VERSION=latest
-
-RUN apk --no-cache add make gcc g++ python bash
+RUN apk --no-cache add bash
 RUN npm i -g yarn --force
-RUN mkdir -p /var/db
+RUN mkdir /var/deployment
+COPY ./ /var/deployment
 
-RUN for i in 1 2 3 4 5; do yarn global add @energyweb/origin-backend-app@${VERSION} && break || sleep 15; done
+WORKDIR /var/deployment/apps/ute-issuer-api
 
-CMD ["/bin/bash", "-c", "origin-backend-app"]
+CMD ["/bin/bash","-c", "yarn migrate:docker && bin/ute-issuer-api"]

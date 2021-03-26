@@ -5,8 +5,13 @@
     "description": "UTE Issuer API",
     "main": "dist/js/src/index.js",
     "scripts": {
+        "prebuild": "rm -rf dist",
+        "build": "yarn build:ts",
+        "build:ts": "tsc -b tsconfig.json",
+        "deploy:heroku": "make build deploy-heroku",
         "lint": "eslint \"src/**/*{.ts,.tsx}\" --quiet",
         "lint-fix": "eslint \"src/**/*{.ts,.tsx}\" --fix",
+        "typeorm:migrate": "typeorm migration:run --config node_modules/@energyweb/exchange/dist/js/ormconfig.js && typeorm migration:run --config node_modules/@energyweb/origin-backend/dist/js/ormconfig.js && typeorm migration:run --config node_modules/@energyweb/issuer-api/dist/js/ormconfig.js && typeorm migration:run --config node_modules/@energyweb/origin-organization-irec-api/dist/js/ormconfig.js",
         "precommit": "lint-staged",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -31,7 +36,8 @@
         "@nestjs/swagger": "4.8.0",
         "@nestjs/typeorm": "7.1.5",
         "ethers": "5.0.32",
-        "moment": "2.29.1"
+        "moment": "2.29.1",
+        "typeorm": "0.2.31"
     },
     "devDependencies": {
         "@types/chai": "4.2.15",
