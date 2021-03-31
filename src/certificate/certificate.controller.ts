@@ -4,53 +4,50 @@ import {
     Body,
     Controller,
     Get,
-    Post,
-    UseGuards,
+    HttpStatus,
     Param,
     ParseIntPipe,
+    Post,
     Put,
-    UseInterceptors,
-    HttpStatus,
     Query,
+    UseGuards,
+    UseInterceptors,
     UsePipes,
     ValidationPipe
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Role } from '@energyweb/origin-backend-core';
 import {
-    ActiveUserGuard,
-    BlockchainAccountGuard,
     BlockchainAccountDecorator,
+    BlockchainAccountGuard,
     ExceptionInterceptor,
-    Roles,
-    RolesGuard
+    Roles
 } from '@energyweb/origin-backend-utils';
-
 import {
-    IssueCertificateCommand,
-    IssueCertificateDTO,
-    GetAllCertificatesQuery,
-    GetCertificateQuery,
-    TransferCertificateCommand,
-    TransferCertificateDTO,
-    ClaimCertificateDTO,
-    ClaimCertificateCommand,
-    GetCertificateByTokenIdQuery,
-    GetAggregateCertifiedEnergyByDeviceIdQuery,
     BulkClaimCertificatesCommand,
     BulkClaimCertificatesDTO,
-    GetAllCertificateEventsQuery,
+    Certificate,
     CertificateDTO,
     certificateToDto,
-    Certificate
+    ClaimCertificateCommand,
+    ClaimCertificateDTO,
+    GetAggregateCertifiedEnergyByDeviceIdQuery,
+    GetAllCertificateEventsQuery,
+    GetAllCertificatesQuery,
+    GetCertificateByTokenIdQuery,
+    GetCertificateQuery,
+    IssueCertificateCommand,
+    IssueCertificateDTO,
+    TransferCertificateCommand,
+    TransferCertificateDTO
 } from '@energyweb/issuer-api';
 import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
 
+import { UteIssuerGuard } from './ute-issuer.guard';
+
 @ApiTags('certificates')
-@ApiBearerAuth('access-token')
 @Controller('certificate')
 @UseInterceptors(ExceptionInterceptor)
 @UsePipes(ValidationPipe)
@@ -58,7 +55,7 @@ export class CertificateController {
     constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
     @Get('/:id')
-    @UseGuards(AuthGuard(), ActiveUserGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiResponse({
         status: HttpStatus.OK,
         type: CertificateDTO,
@@ -76,7 +73,7 @@ export class CertificateController {
     }
 
     @Get('/token-id/:tokenId')
-    @UseGuards(AuthGuard(), ActiveUserGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiResponse({
         status: HttpStatus.OK,
         type: CertificateDTO,
@@ -94,7 +91,7 @@ export class CertificateController {
     }
 
     @Get()
-    @UseGuards(AuthGuard(), ActiveUserGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiResponse({
         status: HttpStatus.OK,
         type: [CertificateDTO],
@@ -134,7 +131,7 @@ export class CertificateController {
     }
 
     @Post()
-    @UseGuards(AuthGuard(), ActiveUserGuard, RolesGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
     @Roles(Role.Issuer)
     @ApiResponse({
         status: HttpStatus.CREATED,
@@ -160,7 +157,7 @@ export class CertificateController {
     }
 
     @Put('/:id/transfer')
-    @UseGuards(AuthGuard(), ActiveUserGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
     @ApiBody({ type: TransferCertificateDTO })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -184,7 +181,7 @@ export class CertificateController {
     }
 
     @Put('/:id/claim')
-    @UseGuards(AuthGuard(), ActiveUserGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
     @ApiBody({ type: ClaimCertificateDTO })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -202,7 +199,7 @@ export class CertificateController {
     }
 
     @Put('/bulk-claim')
-    @UseGuards(AuthGuard(), ActiveUserGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
     @ApiBody({ type: BulkClaimCertificatesDTO })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -219,7 +216,7 @@ export class CertificateController {
     }
 
     @Get('/:id/events')
-    @UseGuards(AuthGuard(), ActiveUserGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiResponse({
         status: HttpStatus.OK,
         type: [CertificateEvent],

@@ -21,7 +21,7 @@ DB_HOST      - default 'localhost'
 DB_PORT      - default 5432
 DB_USERNAME  - default 'postgres',
 DB_PASSWORD  - default 'postgres',
-DB_DATABASE  - default 'origin',
+DB_DATABASE  - default 'ute-issuer',
 ```
 
 or
@@ -53,16 +53,6 @@ WEB3:                                           <WEB3 provider url>
 ```
 docker pull postgres
 docker run --name origin-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres
-```
-
-#### pgAdmin
-
-```
-docker pull dpage/pgadmin4
-docker run -p 80:80 \
-    -e 'PGADMIN_DEFAULT_EMAIL=user@domain.com' \
-    -e 'PGADMIN_DEFAULT_PASSWORD=SuperSecret' \
-    -d dpage/pgadmin4
 ```
 
 ### Swagger

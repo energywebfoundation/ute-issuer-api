@@ -1,10 +1,15 @@
-FROM node:14-alpine
+FROM --platform=linux/amd64 node:14-alpine
 
 RUN apk --no-cache add bash
 RUN npm i -g yarn --force
-RUN mkdir /var/deployment
-COPY ./ /var/deployment
+RUN yarn install
 
-WORKDIR /var/deployment/apps/ute-issuer-api
+RUN mkdir -p /project/ute-issuer-api
+COPY ["package.json", "yarn.lock", "./"]
+RUN yarn install --production
+
+COPY ["./bin", "./src", "./"]
+
+WORKDIR /project/ute-issuer-api
 
 CMD ["/bin/bash","-c", "yarn migrate:docker && bin/ute-issuer-api"]

@@ -3,12 +3,8 @@ NAME   				= energyweb/${PROJECT}
 LATEST 				= ${NAME}:latest
 
 build:
-	@rm -rf ./deployment
-	@mkdir ./deployment
-	@yarn deploy -p @energyweb/ute-issuer-api -t ./deployment --overwrite
 	@docker rmi ${LATEST} -f
-	@docker build -t ${NAME} -f Dockerfile ./deployment
-	@rm -rf ./deployment
+	@docker build -f Dockerfile -t ${NAME} .
 	@docker tag ${NAME} ${LATEST}
 
 deploy-heroku:
