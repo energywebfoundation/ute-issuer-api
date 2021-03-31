@@ -5,8 +5,8 @@ RUN npm i -g yarn --force
 RUN yarn install
 
 RUN mkdir -p /project/ute-issuer-api
-COPY ["package.json", "yarn.lock", "./"]
-RUN yarn install --production
+COPY ["package.json", "yarn.lock", "ormconfig.ts", "tsconfig.json", "./"]
+RUN yarn install
 
 COPY ["./bin", "./src", "./"]
 

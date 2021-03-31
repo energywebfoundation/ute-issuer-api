@@ -15,8 +15,8 @@
         "deploy:heroku": "make build deploy-heroku",
         "lint": "eslint \"src/**/*{.ts,.tsx}\" --quiet",
         "lint-fix": "eslint \"src/**/*{.ts,.tsx}\" --fix",
-        "migrate:docker": "yarn typeorm:migrate:issuer",
-        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ormconfig.ts",
+        "x": "ts-node -r tsconfig-paths --help",
+        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./ormconfig.ts",
         "typeorm:migrate": "yarn typeorm migration:run",
         "precommit": "lint-staged",
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -46,6 +46,8 @@
         "express": "4.17.1",
         "moment": "2.29.1",
         "passport": "^0.4.1",
+        "ts-node": "9.1.1",
+        "tsconfig-paths": "^3.9.0",
         "typeorm": "0.2.31"
     },
     "devDependencies": {
@@ -67,7 +69,6 @@
         "lint-staged": "10.5.4",
         "mocha": "8.3.2",
         "prettier": "2.2.1",
-        "ts-node": "9.1.1",
         "typescript": "4.2.3"
     },
     "husky": {
