@@ -16,8 +16,8 @@
         "lint": "eslint \"src/**/*{.ts,.tsx}\" --quiet",
         "lint-fix": "eslint \"src/**/*{.ts,.tsx}\" --fix",
         "migrate:docker": "yarn typeorm:migrate:issuer",
-        "typeorm:migrate:issuer": "typeorm migration:run --config node_modules/@energyweb/exchange/dist/js/ormconfig.js",
-        "typeorm:run": "yarn typeorm migration:run",
+        "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ormconfig.ts",
+        "typeorm:migrate": "yarn typeorm migration:run",
         "precommit": "lint-staged",
         "test": "echo \"Error: no test specified\" && exit 1"
     },

@@ -12,4 +12,4 @@ COPY ["./bin", "./src", "./"]
 
 WORKDIR /project/ute-issuer-api
 
-CMD ["/bin/bash","-c", "yarn migrate:docker && bin/ute-issuer-api"]
+CMD ["/bin/bash","-c", "yarn typeorm:migrate && bin/ute-issuer-api"]
