@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
+import { ConfigModule } from '@nestjs/config';
 import {
     Certificate,
     BlockchainPropertiesModule,
@@ -10,7 +11,12 @@ import {
 import { CertificateController } from './certificate.controller';
 
 @Module({
-    imports: [CqrsModule, TypeOrmModule.forFeature([Certificate]), BlockchainPropertiesModule],
+    imports: [
+        ConfigModule,
+        CqrsModule,
+        TypeOrmModule.forFeature([Certificate]),
+        BlockchainPropertiesModule
+    ],
     controllers: [CertificateController],
     providers: [...CertificateHandlers, OnChainCertificateWatcher],
     exports: [...CertificateHandlers, OnChainCertificateWatcher]

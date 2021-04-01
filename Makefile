@@ -3,6 +3,7 @@ NAME   				= energyweb/${PROJECT}
 LATEST 				= ${NAME}:latest
 
 build:
+	@yarn build
 	@docker rmi ${LATEST} -f
 	@docker build -f Dockerfile -t ${NAME} .
 	@docker tag ${NAME} ${LATEST}

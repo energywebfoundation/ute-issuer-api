@@ -2,6 +2,7 @@ import { DynamicModule, Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { HTTPLoggingInterceptor } from '@energyweb/origin-backend-utils';
 import { CertificateModule, entities as CertificateEntities } from './certificate';
 
@@ -31,11 +32,11 @@ const OriginAppTypeOrmModule = () => {
 };
 
 @Module({})
-export class OriginAppModule {
+export class UteAppModule {
     static register(): DynamicModule {
         return {
-            module: OriginAppModule,
-            imports: [OriginAppTypeOrmModule(), CertificateModule, CqrsModule],
+            module: UteAppModule,
+            imports: [OriginAppTypeOrmModule(), ConfigModule, CertificateModule, CqrsModule],
             providers: [{ provide: APP_INTERCEPTOR, useClass: HTTPLoggingInterceptor }]
         };
     }

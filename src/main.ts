@@ -1,7 +1,7 @@
 import { LoggerService } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { OriginAppModule } from './origin-app.module';
+import { UteAppModule } from './ute-app.module';
 
 function getPort(): number {
     return parseInt(process.env.PORT, 10) || parseInt(process.env.BACKEND_PORT, 10) || 3030;
@@ -11,7 +11,7 @@ export async function startAPI(logger?: LoggerService) {
     const PORT = getPort();
     console.log(`UTE issuer backend starting on port: ${PORT}`);
 
-    const app = await NestFactory.create(OriginAppModule.register());
+    const app = await NestFactory.create(UteAppModule.register());
 
     app.enableShutdownHooks();
     app.enableCors();
@@ -22,8 +22,8 @@ export async function startAPI(logger?: LoggerService) {
     }
 
     const options = new DocumentBuilder()
-        .setTitle('Origin API')
-        .setDescription('Swagger documentation for Origin API')
+        .setTitle('UTE Issuer API')
+        .setDescription('Swagger documentation for UTE Issuer API')
         .setVersion('1.0')
         .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'access-token')
         .build();

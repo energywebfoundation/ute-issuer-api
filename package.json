@@ -15,7 +15,7 @@
         "deploy:heroku": "make build deploy-heroku",
         "lint": "eslint \"src/**/*{.ts,.tsx}\" --quiet",
         "lint-fix": "eslint \"src/**/*{.ts,.tsx}\" --fix",
-        "x": "ts-node -r tsconfig-paths --help",
+        "migrate:certificates": "",
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./ormconfig.ts",
         "typeorm:migrate": "yarn typeorm migration:run",
         "precommit": "lint-staged",
@@ -31,6 +31,7 @@
     "author": "EnergyWeb DevHub GmbH; Aleksandr Marenin, aleksandr.marenin@energyweb.org",
     "dependencies": {
         "@energyweb/issuer-api": "0.2.1-alpha.1616755491.0",
+        "@energyweb/migrations": "3.2.4",
         "@energyweb/origin-backend-core": "8.0.1",
         "@energyweb/origin-backend-utils": "1.5.1",
         "@nestjs/common": "7.6.15",
