@@ -38,10 +38,6 @@ BACKEND_PORT:                                   <Same as PORT>
 BACKEND_URL:                                    <URL on which this application will be available for e.g https://origin-api-canary.herokuapp.com>
 BLOCKCHAIN_EXPLORER_URL:                        <For e.g for Volta network https://volta-rpc-origin-0a316ab339e3d2ee3.energyweb.org>
 DEPLOY_KEY:                                     <Private key used for Issuer contracts deployment>
-ENERGY_API_BASE_URL:                            <URL for Energy API>
-EXCHANGE_ACCOUNT_DEPLOYER_PRIV:                 <Private key used for exchange accounts deployment>
-EXCHANGE_WALLET_PRIV:                           <Private key for wallet used for withdrawals>
-EXCHANGE_WALLET_PUB:                            <Address of the wallet defined in EXCHANGE_WALLET_PRIV>
 ISSUER_ID:                                      <Name of the external device id type used in the issuance process for e.g Issuer ID>
 JWT_EXPIRY_TIME:                                <Expiry time for e.g 7 days>
 JWT_SECRET:                                     <Secret>
@@ -60,3 +56,12 @@ docker run --name origin-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 
 Swagger endpoint can be found at
 
 `http://localhost:3033/api`
+
+### Deploy to Heroku
+```
+HEROKU_API_KEY=<key> HEROKU_STABLE_APP_API=ute-issuer-api-stable yarn deploy:heroku
+```
+
+By default `HEROKU_API_KEY` is set in .netrc when you authorize with `heroku` login
+Also it can be retrieved by `heroku auth:token` command
+

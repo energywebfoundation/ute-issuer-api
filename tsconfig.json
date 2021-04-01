@@ -16,7 +16,8 @@
         "pretty": true,
         "composite": true,
         "outDir": "./dist/js",
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "baseUrl": "./"
     },
     "include": ["./src/**/*", "ormconfig.json"]
 }
