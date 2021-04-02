@@ -7,7 +7,7 @@ function getPort(): number {
     return parseInt(process.env.PORT, 10) || parseInt(process.env.BACKEND_PORT, 10) || 3030;
 }
 
-export async function startAPI(logger?: LoggerService) {
+export async function startAPI(logger?: LoggerService): Promise<void> {
     const PORT = getPort();
     console.log(`UTE issuer backend starting on port: ${PORT}`);
 
@@ -32,8 +32,6 @@ export async function startAPI(logger?: LoggerService) {
     SwaggerModule.setup('swagger', app, document);
 
     await app.listen(PORT);
-
-    return app;
 }
 
 startAPI()

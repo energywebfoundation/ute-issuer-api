@@ -23,8 +23,11 @@ const config: ConnectionOptions = {
     ...getDBConnectionOptions(),
     synchronize: false,
     migrationsRun: true,
-    migrations: [`${__dirname}/node_modules/@energyweb/issuer-api/dist/js/migrations/*.js`],
-    migrationsTableName: 'migrations_issuer'
+    migrations: [
+        `${__dirname}/node_modules/@energyweb/issuer-api/dist/js/migrations/*.js`,
+        `${__dirname}/migrations/*.ts`
+    ],
+    migrationsTableName: 'migrations_ute_issuer'
 };
 
 export = config;

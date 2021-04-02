@@ -139,7 +139,7 @@
     swagger-ui-express "4.1.6"
     typeorm "0.2.31"
 
-"@energyweb/issuer@3.2.0":
+"@energyweb/issuer@3.2.0", "@energyweb/issuer@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@energyweb/issuer/-/issuer-3.2.0.tgz#8a06598148f641490d2825ef69c49d4684fd6019"
   integrity sha512-2bl9CMOYj4kdBBLhvy3jfU3kOMfsUSRZijWHSsnmTse99cj+zM54vd/cQc63i2s/0aM53q1rqbS8qYwa2WD1vg==
@@ -167,7 +167,7 @@
     precise-proofs-js "1.2.0"
     winston "3.3.3"
 
-"@energyweb/migrations@^3.2.4":
+"@energyweb/migrations@3.2.4":
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/@energyweb/migrations/-/migrations-3.2.4.tgz#0aa414196db3a1f9fb7e46e3714d321ce607e9d0"
   integrity sha512-xymh2HhfGywX3b/Jci4hUToEhFt7wC9AsR0Be/5mdoXEgJ3/WfESIbABWv+sxWkG+QB1hmmPxc6yONOeSJWWbw==
@@ -234,7 +234,7 @@
     rxjs "6.6.6"
     typeorm "0.2.31"
 
-"@energyweb/utils-general@11.0.2":
+"@energyweb/utils-general@11.0.2", "@energyweb/utils-general@^11.0.2":
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/@energyweb/utils-general/-/utils-general-11.0.2.tgz#e8414cb710346d098c56a9bb23cb7eff76223c30"
   integrity sha512-EWoasu269mzkSZ9xHEZUAAGvRrOs23yIXN5LOSFpfEGU90asF0ije8J2BL7uKDe6R82ZuQ2WqCByy36FUg2jfg==

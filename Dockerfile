@@ -9,4 +9,5 @@ COPY ["package.json", "yarn.lock", "/project/ute-issuer-api/"]
 RUN yarn install
 COPY . .
 
-CMD ["/bin/bash","-c", "pwd && ls -lah && yarn typeorm:migrate && /project/ute-issuer-api/bin/ute-issuer-api"]
+CMD ["/bin/bash","-c", "yarn typeorm:migrate && \
+    /project/ute-issuer-api/bin/ute-issuer-api"]
