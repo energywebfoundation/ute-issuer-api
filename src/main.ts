@@ -25,7 +25,7 @@ export async function startAPI(logger?: LoggerService): Promise<void> {
         .setTitle('UTE Issuer API')
         .setDescription('Swagger documentation for UTE Issuer API')
         .setVersion('1.0')
-        .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'access-token')
+        .addApiKey({ type: 'apiKey', in: 'header', name: 'api-key' }, 'gats')
         .build();
 
     const document = SwaggerModule.createDocument(app, options);
