@@ -44,8 +44,7 @@ import {
 } from '@energyweb/issuer-api';
 import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
-
-import { UteIssuerGuard } from './ute-issuer.guard';
+import { UteIssuerGuard } from '../ute-issuer.guard';
 
 @ApiTags('certificates')
 @Controller('certificate')

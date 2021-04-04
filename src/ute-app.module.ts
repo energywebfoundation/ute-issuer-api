@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { HTTPLoggingInterceptor } from '@energyweb/origin-backend-utils';
 import { CertificateModule, entities as CertificateEntities } from './certificate';
+import { BlockchainPropertiesModule } from './blockchain';
 
 const OriginAppTypeOrmModule = () => {
     const entities = [...CertificateEntities];
@@ -36,7 +37,13 @@ export class UteAppModule {
     static register(): DynamicModule {
         return {
             module: UteAppModule,
-            imports: [OriginAppTypeOrmModule(), ConfigModule, CertificateModule, CqrsModule],
+            imports: [
+                OriginAppTypeOrmModule(),
+                ConfigModule,
+                CertificateModule,
+                BlockchainPropertiesModule,
+                CqrsModule
+            ],
             providers: [{ provide: APP_INTERCEPTOR, useClass: HTTPLoggingInterceptor }]
         };
     }
