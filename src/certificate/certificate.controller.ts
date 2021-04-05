@@ -19,7 +19,6 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Role } from '@energyweb/origin-backend-core';
 import {
-    BlockchainAccountDecorator,
     BlockchainAccountGuard,
     ExceptionInterceptor,
     Roles
@@ -62,7 +61,7 @@ export class CertificateController {
     })
     public async get(
         @Param('id', new ParseIntPipe()) id: number,
-        @BlockchainAccountDecorator() blockchainAddress: string
+        @Query('blockchainAddress') blockchainAddress: string
     ): Promise<CertificateDTO> {
         const certificate = await this.queryBus.execute<GetCertificateQuery, Certificate>(
             new GetCertificateQuery(id)
@@ -80,7 +79,7 @@ export class CertificateController {
     })
     public async getByTokenId(
         @Param('tokenId', new ParseIntPipe()) tokenId: number,
-        @BlockchainAccountDecorator() blockchainAddress: string
+        @Query('blockchainAddress') blockchainAddress: string
     ): Promise<CertificateDTO> {
         const certificate = await this.queryBus.execute<GetCertificateByTokenIdQuery, Certificate>(
             new GetCertificateByTokenIdQuery(tokenId)
@@ -97,7 +96,7 @@ export class CertificateController {
         description: 'Returns all Certificates'
     })
     public async getAll(
-        @BlockchainAccountDecorator() blockchainAddress: string
+        @Query('blockchainAddress') blockchainAddress: string
     ): Promise<CertificateDTO[]> {
         const certificates = await this.queryBus.execute<GetAllCertificatesQuery, Certificate[]>(
             new GetAllCertificatesQuery()
@@ -139,7 +138,7 @@ export class CertificateController {
     })
     @ApiBody({ type: IssueCertificateDTO })
     public async issue(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('blockchainAddress') blockchainAddress: string,
         @Body() dto: IssueCertificateDTO
     ): Promise<CertificateDTO> {
         return this.commandBus.execute(
@@ -164,7 +163,7 @@ export class CertificateController {
         description: 'Returns whether the transfer succeeded'
     })
     public async transfer(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('blockchainAddress') blockchainAddress: string,
         @Param('id', new ParseIntPipe()) certificateId: number,
         @Body() dto: TransferCertificateDTO
     ): Promise<SuccessResponseDTO> {
@@ -188,7 +187,7 @@ export class CertificateController {
         description: 'Returns whether the claim succeeded'
     })
     public async claim(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('blockchainAddress') blockchainAddress: string,
         @Param('id', new ParseIntPipe()) certificateId: number,
         @Body() dto: ClaimCertificateDTO
     ): Promise<SuccessResponseDTO> {
@@ -206,7 +205,7 @@ export class CertificateController {
         description: 'Returns whether the bulk claim succeeded'
     })
     public async bulkClaim(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('blockchainAddress') blockchainAddress: string,
         @Body() dto: BulkClaimCertificatesDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
