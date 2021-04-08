@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "declaration": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "ES2020",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": ["node", "mocha"],
+        "skipLibCheck": true,
+        "preserveSymlinks": true,
+        "pretty": true,
+        "composite": true,
+        "outDir": "./dist/js",
+        "experimentalDecorators": true,
+        "baseUrl": "./",
+        "emitDecoratorMetadata": true
+    },
+    "include": ["./src/**/*", "ormconfig.json"]
+}
