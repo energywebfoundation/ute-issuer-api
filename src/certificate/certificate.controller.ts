@@ -16,7 +16,7 @@ import {
     ValidationPipe
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { Role } from '@energyweb/origin-backend-core';
 import {
     BlockchainAccountGuard,
@@ -45,6 +45,7 @@ import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/succ
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
 import { UteIssuerGuard } from '../ute-issuer.guard';
 
+@ApiSecurity('ute-api-key')
 @ApiTags('certificates')
 @Controller('certificate')
 @UseInterceptors(ExceptionInterceptor)
