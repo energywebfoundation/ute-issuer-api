@@ -1,10 +1,10 @@
 import { Controller, Get, HttpStatus, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { BlockchainPropertiesDTO, BlockchainPropertiesService } from '@energyweb/issuer-api';
 import { UteIssuerGuard } from '../ute-issuer.guard';
 
+@ApiSecurity('ute-api-key')
 @ApiTags('blockchain-properties')
-@ApiBearerAuth('access-token')
 @Controller('blockchain-properties')
 export class BlockchainPropertiesController {
     constructor(private readonly blockchainPropertiesService: BlockchainPropertiesService) {}
