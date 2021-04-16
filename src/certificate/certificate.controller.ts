@@ -143,7 +143,6 @@ export class CertificateController {
     })
     @ApiBody({ type: IssueCertificateDTO })
     public async issue(@Body() dto: IssueCertificateDTO): Promise<CertificateDTO> {
-        process.exit(1);
         return this.commandBus.execute(
             new IssueCertificateCommand(
                 dto.to,

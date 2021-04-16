@@ -1,7 +1,9 @@
-import { IntUnitsOfEnergy, PositiveBNStringValidator } from '@energyweb/origin-backend-utils';
+import { PositiveBNStringValidator } from '@energyweb/origin-backend-utils';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString, Validate, ValidateIf, ValidateNested } from 'class-validator';
+
 import { DelegatedTransferOptions } from './delegated-transfer.dto';
+import { IntUnitsOfEnergy } from '../utils';
 
 export class TransferCertificateDTO {
     @ApiProperty({ type: String })

@@ -2,6 +2,8 @@ import { BigNumber, utils } from 'ethers';
 import { Certificate } from '@energyweb/issuer-api';
 import { CertificateDTO } from '../dto';
 
+export * from './intUnitOfEnergy';
+
 export const certificateToDto = async (
     certificate: Certificate,
     userId?: string

@@ -1,6 +1,7 @@
-import { IntUnitsOfEnergy } from '@energyweb/origin-backend-utils';
 import { ApiProperty } from '@nestjs/swagger';
 import { Validate } from 'class-validator';
+
+import { IntUnitsOfEnergy } from '../utils';
 
 export class EnergyDTO {
     @ApiProperty({ type: String })
