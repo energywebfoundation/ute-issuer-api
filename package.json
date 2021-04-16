@@ -45,6 +45,7 @@
         "@nestjs/schematics": "7.3.0",
         "@nestjs/swagger": "4.8.0",
         "@nestjs/typeorm": "7.1.5",
+        "class-validator": "^0.13.1",
         "dotenv": "8.2.0",
         "ethers": "5.0.32",
         "express": "4.17.1",

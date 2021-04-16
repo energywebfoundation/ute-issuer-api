@@ -18,31 +18,31 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { Role } from '@energyweb/origin-backend-core';
-import {
-    BlockchainAccountGuard,
-    ExceptionInterceptor,
-    Roles
-} from '@energyweb/origin-backend-utils';
+import { ExceptionInterceptor, Roles } from '@energyweb/origin-backend-utils';
 import {
     BulkClaimCertificatesCommand,
-    BulkClaimCertificatesDTO,
     Certificate,
-    CertificateDTO,
-    certificateToDto,
     ClaimCertificateCommand,
-    ClaimCertificateDTO,
     GetAggregateCertifiedEnergyByDeviceIdQuery,
     GetAllCertificateEventsQuery,
     GetAllCertificatesQuery,
     GetCertificateByTokenIdQuery,
     GetCertificateQuery,
     IssueCertificateCommand,
-    IssueCertificateDTO,
-    TransferCertificateCommand,
-    TransferCertificateDTO
+    TransferCertificateCommand
 } from '@energyweb/issuer-api';
 import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
+import { ConfigService } from '@nestjs/config';
+
+import {
+    BulkClaimCertificatesDTO,
+    CertificateDTO,
+    ClaimCertificateDTO,
+    IssueCertificateDTO,
+    TransferCertificateDTO
+} from './dto';
+import { certificateToDto } from './utils';
 import { UteIssuerGuard } from '../ute-issuer.guard';
 
 @ApiSecurity('ute-api-key')
@@ -51,7 +51,11 @@ import { UteIssuerGuard } from '../ute-issuer.guard';
 @UseInterceptors(ExceptionInterceptor)
 @UsePipes(ValidationPipe)
 export class CertificateController {
-    constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+    constructor(
+        private readonly commandBus: CommandBus,
+        private readonly queryBus: QueryBus,
+        private readonly configService: ConfigService
+    ) {}
 
     @Get('/:id')
     @UseGuards(UteIssuerGuard)
@@ -130,7 +134,7 @@ export class CertificateController {
     }
 
     @Post()
-    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard)
     @Roles(Role.Issuer)
     @ApiResponse({
         status: HttpStatus.CREATED,
@@ -138,10 +142,8 @@ export class CertificateController {
         description: 'Returns the issued Certificate'
     })
     @ApiBody({ type: IssueCertificateDTO })
-    public async issue(
-        @Query('blockchainAddress') blockchainAddress: string,
-        @Body() dto: IssueCertificateDTO
-    ): Promise<CertificateDTO> {
+    public async issue(@Body() dto: IssueCertificateDTO): Promise<CertificateDTO> {
+        process.exit(1);
         return this.commandBus.execute(
             new IssueCertificateCommand(
                 dto.to,
@@ -149,14 +151,14 @@ export class CertificateController {
                 dto.fromTime,
                 dto.toTime,
                 dto.deviceId,
-                blockchainAddress,
+                dto.to,
                 dto.isPrivate
             )
         );
     }
 
     @Put('/:id/transfer')
-    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiBody({ type: TransferCertificateDTO })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -180,7 +182,7 @@ export class CertificateController {
     }
 
     @Put('/:id/claim')
-    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiBody({ type: ClaimCertificateDTO })
     @ApiResponse({
         status: HttpStatus.OK,
@@ -198,7 +200,7 @@ export class CertificateController {
     }
 
     @Put('/bulk-claim')
-    @UseGuards(UteIssuerGuard, BlockchainAccountGuard)
+    @UseGuards(UteIssuerGuard)
     @ApiBody({ type: BulkClaimCertificatesDTO })
     @ApiResponse({
         status: HttpStatus.OK,

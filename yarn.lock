@@ -139,7 +139,7 @@
     swagger-ui-express "4.1.6"
     typeorm "0.2.31"
 
-"@energyweb/issuer@3.2.0", "@energyweb/issuer@^3.2.0":
+"@energyweb/issuer@3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@energyweb/issuer/-/issuer-3.2.0.tgz#8a06598148f641490d2825ef69c49d4684fd6019"
   integrity sha512-2bl9CMOYj4kdBBLhvy3jfU3kOMfsUSRZijWHSsnmTse99cj+zM54vd/cQc63i2s/0aM53q1rqbS8qYwa2WD1vg==
@@ -234,7 +234,7 @@
     rxjs "6.6.6"
     typeorm "0.2.31"
 
-"@energyweb/utils-general@11.0.2", "@energyweb/utils-general@^11.0.2":
+"@energyweb/utils-general@11.0.2":
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/@energyweb/utils-general/-/utils-general-11.0.2.tgz#e8414cb710346d098c56a9bb23cb7eff76223c30"
   integrity sha512-EWoasu269mzkSZ9xHEZUAAGvRrOs23yIXN5LOSFpfEGU90asF0ije8J2BL7uKDe6R82ZuQ2WqCByy36FUg2jfg==
@@ -1045,7 +1045,7 @@
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-7.1.5.tgz#b32fc0492008d73ebae4327fbc0012a738a83664"
   integrity sha512-Hu9hPxTdBZA0C4GrWTsSflzwsJ99oAk9jqAwpcszdFNqfjMjkPGuCM9QsVZbBP2bE8fxrVrPsNOILS6puY8e/A==
 
-"@nestjs/platform-express@^7.6.15":
+"@nestjs/platform-express@7.6.15":
   version "7.6.15"
   resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.6.15.tgz#816db6999bf65284d5e1292092ec71acd812fbbb"
   integrity sha512-XpoHtai7UlUvm6rLo0u2xtkABhC6YbxNuNYqpv/L+mT1xzKJtPV2jWYxJnsE4WNZAddsnKsAcDjj2nCQgiJ52Q==
@@ -2041,7 +2041,7 @@ class-transformer@0.3.1:
   resolved "https://registry.yarnpkg.com/class-transformer/-/class-transformer-0.3.1.tgz#ee681a5439ff2230fc57f5056412d3befa70d597"
   integrity sha512-cKFwohpJbuMovS8xVLmn8N2AUbAuc8pVo4zEfsUVo8qgECOogns1WVk/FkOZoxhOPTyTYFckuoH+13FO+MQ8GA==
 
-class-validator@0.13.1, class-validator@^0.13.0:
+class-validator@0.13.1, class-validator@^0.13.0, class-validator@^0.13.1:
   version "0.13.1"
   resolved "https://registry.yarnpkg.com/class-validator/-/class-validator-0.13.1.tgz#381b2001ee6b9e05afd133671fbdf760da7dec67"
   integrity sha512-zWIeYFhUitvAHBwNhDdCRK09hWx+P0HUwFE8US8/CxFpMVzkUK8RJl7yOIE+BVu2lxyPNgeOaFv78tLE47jBIg==
@@ -4612,7 +4612,7 @@ passport-strategy@1.x.x:
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
   integrity sha1-tVOaqPwiWj0a0XlHbd8ja0QPUuQ=
 
-passport@^0.4.1:
+passport@0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/passport/-/passport-0.4.1.tgz#941446a21cb92fc688d97a0861c38ce9f738f270"
   integrity sha512-IxXgZZs8d7uFSt3eqNjM9NQ3g3uQCW5avD8mRNoXV99Yig50vjuaez6dQK2qC0kVWPRTujxY0dWgGfT09adjYg==
