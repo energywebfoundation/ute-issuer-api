@@ -33,7 +33,6 @@ import {
 } from '@energyweb/issuer-api';
 import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
-import { ConfigService } from '@nestjs/config';
 
 import {
     BulkClaimCertificatesDTO,
@@ -51,11 +50,7 @@ import { UteIssuerGuard } from '../ute-issuer.guard';
 @UseInterceptors(ExceptionInterceptor)
 @UsePipes(ValidationPipe)
 export class CertificateController {
-    constructor(
-        private readonly commandBus: CommandBus,
-        private readonly queryBus: QueryBus,
-        private readonly configService: ConfigService
-    ) {}
+    constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
     @Get('/:id')
     @UseGuards(UteIssuerGuard)

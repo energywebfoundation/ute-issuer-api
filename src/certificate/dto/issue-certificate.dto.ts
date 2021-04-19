@@ -5,30 +5,30 @@ import { IsBoolean, IsInt, IsPositive, IsString, Validate, ValidateIf } from 'cl
 import { IntUnitsOfEnergy } from '../utils';
 
 export class IssueCertificateDTO {
-    @ApiProperty({ type: String })
+    @ApiProperty({ type: String, example: '0xD173313A51f8fc37BcF67569b463abd89d81844f' })
     @IsString()
     to: string;
 
-    @ApiProperty({ type: String })
+    @ApiProperty({ type: String, example: '10000000' })
     @Validate(PositiveBNStringValidator)
     @Validate(IntUnitsOfEnergy)
     energy: string;
 
-    @ApiProperty({ type: Number })
+    @ApiProperty({ type: Number, example: 1616605000 })
     @IsInt()
     @IsPositive()
     fromTime: number;
 
-    @ApiProperty({ type: Number })
+    @ApiProperty({ type: Number, example: 1616655000 })
     @IsInt()
     @IsPositive()
     toTime: number;
 
-    @ApiProperty({ type: String })
+    @ApiProperty({ type: String, example: 'Device100' })
     @IsString()
     deviceId: string;
 
-    @ApiProperty({ type: Boolean, required: false })
+    @ApiProperty({ type: Boolean, required: false, example: false })
     @ValidateIf((dto: IssueCertificateDTO) => !!dto.isPrivate)
     @IsBoolean()
     isPrivate?: boolean;
