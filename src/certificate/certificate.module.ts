@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ConfigModule } from '@nestjs/config';
 import {
-    Certificate,
     BlockchainPropertiesModule,
+    Certificate,
     CertificateHandlers,
     OnChainCertificateWatcher
 } from '@energyweb/issuer-api';
