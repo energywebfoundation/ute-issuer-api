@@ -103,7 +103,9 @@ export class CertificateController {
         );
 
         const userCertificates = certificates.filter(
-            (cert) => BigNumber.from(cert.owners[blockchainAddress]) > BigNumber.from(0)
+            (cert) =>
+                BigNumber.from(cert.owners[blockchainAddress]) > BigNumber.from(0) ||
+                BigNumber.from(cert.claimers[blockchainAddress]) > BigNumber.from(0)
         );
 
         return Promise.all(
