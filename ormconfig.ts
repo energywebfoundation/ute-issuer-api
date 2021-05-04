@@ -21,6 +21,7 @@ const getDBConnectionOptions = (): ConnectionOptions => {
 
 const config: ConnectionOptions = {
     ...getDBConnectionOptions(),
+    entities: [`${__dirname}/src/**/*.entity.ts`],
     synchronize: false,
     migrationsRun: true,
     migrations: [
