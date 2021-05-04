@@ -101,8 +101,13 @@ export class CertificateController {
         const certificates = await this.queryBus.execute<GetAllCertificatesQuery, Certificate[]>(
             new GetAllCertificatesQuery()
         );
+
+        const userCertificates = certificates.filter(
+            (cert) => BigNumber.from(cert.owners[blockchainAddress]) > BigNumber.from(0)
+        );
+
         return Promise.all(
-            certificates.map((certificate) => certificateToDto(certificate, blockchainAddress))
+            userCertificates.map((certificate) => certificateToDto(certificate, blockchainAddress))
         );
     }
 
