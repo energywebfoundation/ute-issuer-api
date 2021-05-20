@@ -6,9 +6,11 @@ import { ConfigModule } from '@nestjs/config';
 import { HTTPLoggingInterceptor } from '@energyweb/origin-backend-utils';
 import { CertificateModule, entities as CertificateEntities } from './certificate';
 import { BlockchainPropertiesModule } from './blockchain';
+import { AccountModule } from './account/account.module';
+import { Account } from './account/account.entity';
 
 const OriginAppTypeOrmModule = () => {
-    const entities = [...CertificateEntities];
+    const entities = [...CertificateEntities, Account];
 
     return process.env.DATABASE_URL
         ? TypeOrmModule.forRoot({
@@ -42,7 +44,8 @@ export class UteAppModule {
                 ConfigModule,
                 CertificateModule,
                 BlockchainPropertiesModule,
-                CqrsModule
+                CqrsModule,
+                AccountModule
             ],
             providers: [{ provide: APP_INTERCEPTOR, useClass: HTTPLoggingInterceptor }]
         };
