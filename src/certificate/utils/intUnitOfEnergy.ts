@@ -19,6 +19,10 @@ export class IntUnitsOfEnergy implements ValidatorConstraintInterface {
     }
 
     defaultMessage() {
-        return 'Energy volume must be integer number of energy units';
+        return (
+            `Energy volume must be integer number of energy units. ` +
+            `The number must be divisible by ENERGY_PER_UNIT without a remainder. ` +
+            `ENERGY_PER_UNIT=${this.energyPerUnit}`
+        );
     }
 }
