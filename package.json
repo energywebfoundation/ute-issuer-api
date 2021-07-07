@@ -6,7 +6,7 @@
     "main": "dist/js/src/index.js",
     "scripts": {
         "start": "nest start -p tsconfig.json",
-        "start:dev": "yarn typeorm:drop && yarn typeorm:drop:issuer && yarn migrate && nest start --watch -p tsconfig.json",
+        "start:dev": "yarn typeorm:drop && yarn migrate && nest start --watch -p tsconfig.json",
         "start:prod": "node dist/js/src/main.js",
         "start-ganache": "ganache-cli -m 'chalk park staff buzz chair purchase wise oak receive avoid avoid home' -l 8000000 -e 1000000 -a 20 -q",
         "prebuild": "rm -rf dist",
@@ -20,7 +20,6 @@
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./ormconfig.ts",
         "typeorm:run": "yarn typeorm migration:run",
         "typeorm:drop": "yarn typeorm schema:drop",
-        "typeorm:drop:issuer": "node_modules/typeorm/cli.js schema:drop --config node_modules/@energyweb/issuer-api/dist/js/ormconfig.js",
         "precommit": "lint-staged",
         "test": "echo \"Implement tests\""
     },
