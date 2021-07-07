@@ -39,8 +39,6 @@ BACKEND_URL:                                    <URL on which this application w
 BLOCKCHAIN_EXPLORER_URL:                        <For e.g for Volta network https://volta-rpc-origin-0a316ab339e3d2ee3.energyweb.org>
 DEPLOY_KEY:                                     <Private key used for Issuer contracts deployment>
 ISSUER_ID:                                      <Name of the external device id type used in the issuance process for e.g Issuer ID>
-JWT_EXPIRY_TIME:                                <Expiry time for e.g 7 days>
-JWT_SECRET:                                     <Secret>
 WEB3:                                           <WEB3 provider url>
 ```
 

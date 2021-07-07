@@ -11,7 +11,7 @@ export async function startAPI(logger?: LoggerService): Promise<void> {
     const PORT = getPort();
     console.log(`UTE issuer backend starting on port: ${PORT}`);
 
-    const app = await NestFactory.create(UteAppModule.register());
+    const app = await NestFactory.create(UteAppModule);
 
     app.enableShutdownHooks();
     app.enableCors();
