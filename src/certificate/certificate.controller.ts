@@ -1,4 +1,3 @@
-import moment from 'moment';
 import { BigNumber } from 'ethers';
 import {
     Body,
@@ -17,16 +16,14 @@ import {
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { Role } from '@energyweb/origin-backend-core';
-import { ExceptionInterceptor, Roles } from '@energyweb/origin-backend-utils';
+import { ExceptionInterceptor } from '@energyweb/origin-backend-utils';
 import {
-    BulkClaimCertificatesCommand,
     Certificate,
+    CertificateDTO,
+    certificateToDto,
     ClaimCertificateCommand,
-    GetAggregateCertifiedEnergyByDeviceIdQuery,
     GetAllCertificateEventsQuery,
     GetAllCertificatesQuery,
-    GetCertificateByTokenIdQuery,
     GetCertificateQuery,
     IssueCertificateCommand,
     TransferCertificateCommand
@@ -34,15 +31,10 @@ import {
 import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
 import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
 
-import {
-    BulkClaimCertificatesDTO,
-    CertificateDTO,
-    ClaimCertificateDTO,
-    IssueCertificateDTO,
-    TransferCertificateDTO
-} from './dto';
-import { certificateToDto } from './utils';
 import { UteIssuerGuard } from '../ute-issuer.guard';
+import { IssueCertificateDTO } from './dto/issue-certificate.dto';
+import { TransferCertificateDTO } from './dto/transfer-certificate.dto';
+import { ClaimCertificateDTO } from './dto/claim-certificate.dto';
 
 @ApiSecurity('ute-api-key')
 @ApiTags('certificates')
@@ -70,24 +62,6 @@ export class CertificateController {
         return certificateToDto(certificate, blockchainAddress);
     }
 
-    @Get('/token-id/:tokenId')
-    @UseGuards(UteIssuerGuard)
-    @ApiResponse({
-        status: HttpStatus.OK,
-        type: CertificateDTO,
-        description: 'Returns a Certificate by token ID'
-    })
-    public async getByTokenId(
-        @Param('tokenId', new ParseIntPipe()) tokenId: number,
-        @Query('blockchainAddress') blockchainAddress: string
-    ): Promise<CertificateDTO> {
-        const certificate = await this.queryBus.execute<GetCertificateByTokenIdQuery, Certificate>(
-            new GetCertificateByTokenIdQuery(tokenId)
-        );
-
-        return certificateToDto(certificate, blockchainAddress);
-    }
-
     @Get()
     @UseGuards(UteIssuerGuard)
     @ApiResponse({
@@ -104,8 +78,8 @@ export class CertificateController {
 
         const userCertificates = certificates.filter(
             (cert) =>
-                BigNumber.from(cert.owners[blockchainAddress] ?? 0) > BigNumber.from(0) ||
-                BigNumber.from(cert.claimers[blockchainAddress] ?? 0) > BigNumber.from(0)
+                BigNumber.from(cert.owners?.[blockchainAddress] ?? 0) > BigNumber.from(0) ||
+                BigNumber.from(cert.claimers?.[blockchainAddress] ?? 0) > BigNumber.from(0)
         );
 
         return Promise.all(
@@ -113,31 +87,8 @@ export class CertificateController {
         );
     }
 
-    @Get('/issuer/certified/:deviceId')
-    @ApiResponse({
-        status: HttpStatus.OK,
-        type: String,
-        description: 'Returns SUM of certified energy by device ID'
-    })
-    public async getAggregateCertifiedEnergyByDeviceId(
-        @Param('deviceId') deviceId: string,
-        @Query('start') start: string,
-        @Query('end') end: string
-    ): Promise<string> {
-        const startDateToUnix = moment(start).unix();
-        const endDateToUnix = moment(end).unix();
-
-        const result = await this.queryBus.execute<
-            GetAggregateCertifiedEnergyByDeviceIdQuery,
-            BigNumber
-        >(new GetAggregateCertifiedEnergyByDeviceIdQuery(deviceId, startDateToUnix, endDateToUnix));
-
-        return result.toString();
-    }
-
     @Post()
     @UseGuards(UteIssuerGuard)
-    @Roles(Role.Issuer)
     @ApiResponse({
         status: HttpStatus.CREATED,
         type: CertificateDTO,
@@ -152,8 +103,7 @@ export class CertificateController {
                 dto.fromTime,
                 dto.toTime,
                 dto.deviceId,
-                dto.to,
-                dto.isPrivate
+                dto.to
             )
         );
     }
@@ -172,13 +122,7 @@ export class CertificateController {
         @Body() dto: TransferCertificateDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
-            new TransferCertificateCommand(
-                certificateId,
-                blockchainAddress,
-                dto.to,
-                dto.amount,
-                dto.delegated
-            )
+            new TransferCertificateCommand(certificateId, blockchainAddress, dto.to, dto.amount)
         );
     }
 
@@ -197,23 +141,6 @@ export class CertificateController {
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
             new ClaimCertificateCommand(certificateId, dto.claimData, blockchainAddress, dto.amount)
-        );
-    }
-
-    @Put('/bulk-claim')
-    @UseGuards(UteIssuerGuard)
-    @ApiBody({ type: BulkClaimCertificatesDTO })
-    @ApiResponse({
-        status: HttpStatus.OK,
-        type: SuccessResponseDTO,
-        description: 'Returns whether the bulk claim succeeded'
-    })
-    public async bulkClaim(
-        @Query('blockchainAddress') blockchainAddress: string,
-        @Body() dto: BulkClaimCertificatesDTO
-    ): Promise<SuccessResponseDTO> {
-        return this.commandBus.execute(
-            new BulkClaimCertificatesCommand(dto.certificateIds, dto.claimData, blockchainAddress)
         );
     }
 

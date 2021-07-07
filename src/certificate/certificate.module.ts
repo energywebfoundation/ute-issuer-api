@@ -9,6 +9,7 @@ import {
     OnChainCertificateWatcher
 } from '@energyweb/issuer-api';
 import { CertificateController } from './certificate.controller';
+import { CertificateBatchController } from './certificate-batch.controller';
 
 @Module({
     imports: [
@@ -17,7 +18,7 @@ import { CertificateController } from './certificate.controller';
         TypeOrmModule.forFeature([Certificate]),
         BlockchainPropertiesModule
     ],
-    controllers: [CertificateController],
+    controllers: [CertificateController, CertificateBatchController],
     providers: [...CertificateHandlers, OnChainCertificateWatcher],
     exports: [...CertificateHandlers, OnChainCertificateWatcher]
 })
