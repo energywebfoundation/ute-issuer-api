@@ -24,12 +24,12 @@ import {
     ValidationPipe
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiSecurity, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { UteIssuerGuard } from '../ute-issuer.guard';
 
 @ApiTags('certificates')
-@ApiBearerAuth('access-token')
+@ApiSecurity('ute-api-key')
 @Controller('certificate-batch')
 @UseInterceptors(ExceptionInterceptor)
 @UsePipes(ValidationPipe)
