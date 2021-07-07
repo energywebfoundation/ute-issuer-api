@@ -2,7 +2,7 @@ import { PositiveBNStringValidator } from '@energyweb/origin-backend-utils';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, Validate, ValidateIf, ValidateNested } from 'class-validator';
 
-import { ClaimDataDTO } from '@energyweb/issuer-api/dist/js/src/pods/certificate/commands/claim-data.dto';
+import { ClaimDataDTO } from '@energyweb/issuer-api';
 import { IntUnitsOfEnergy } from '../utils';
 
 export class ClaimCertificateDTO {

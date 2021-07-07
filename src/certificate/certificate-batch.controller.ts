@@ -1,12 +1,12 @@
 import {
+    BatchIssueCertificatesCommand,
+    BatchIssueCertificateDTO,
+    BatchTransferCertificatesCommand,
+    BatchTransferCertificatesDTO,
     BatchClaimCertificatesCommand,
     BatchClaimCertificatesDTO,
     CertificateIdsDTO
 } from '@energyweb/issuer-api';
-import { BatchIssueCertificatesCommand } from '@energyweb/issuer-api/dist/js/src/pods/certificate/commands/batch-issue-certificates.command';
-import { BatchIssueCertificateDTO } from '@energyweb/issuer-api/dist/js/src/pods/certificate/commands/batch-issue-certificates.dto';
-import { BatchTransferCertificatesCommand } from '@energyweb/issuer-api/dist/js/src/pods/certificate/commands/batch-transfer-certificates.command';
-import { BatchTransferCertificatesDTO } from '@energyweb/issuer-api/dist/js/src/pods/certificate/commands/batch-transfer-certificates.dto';
 import {
     BlockchainAccountDecorator,
     ExceptionInterceptor,

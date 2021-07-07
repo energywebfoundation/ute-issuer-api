@@ -16,10 +16,11 @@ import {
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { ExceptionInterceptor } from '@energyweb/origin-backend-utils';
+import { ExceptionInterceptor, SuccessResponseDTO } from '@energyweb/origin-backend-utils';
 import {
     Certificate,
     CertificateDTO,
+    CertificateEvent,
     certificateToDto,
     ClaimCertificateCommand,
     GetAllCertificateEventsQuery,
@@ -28,8 +29,6 @@ import {
     IssueCertificateCommand,
     TransferCertificateCommand
 } from '@energyweb/issuer-api';
-import { SuccessResponseDTO } from '@energyweb/issuer-api/dist/js/src/utils/success-response.dto';
-import { CertificateEvent } from '@energyweb/issuer-api/dist/js/src/types';
 
 import { UteIssuerGuard } from '../ute-issuer.guard';
 import { IssueCertificateDTO } from './dto/issue-certificate.dto';
