@@ -4,6 +4,7 @@ import {
     Controller,
     Get,
     HttpStatus,
+    NotFoundException,
     Param,
     ParseIntPipe,
     Post,
@@ -57,6 +58,10 @@ export class CertificateController {
         const certificate = await this.queryBus.execute<GetCertificateQuery, Certificate>(
             new GetCertificateQuery(id)
         );
+
+        if (!certificate) {
+            throw new NotFoundException(`Certificate with ID ${id} does not exist.`);
+        }
 
         return certificateToDto(certificate, blockchainAddress);
     }
