@@ -7,11 +7,7 @@ import {
     BatchClaimCertificatesDTO,
     CertificateIdsDTO
 } from '@energyweb/issuer-api';
-import {
-    BlockchainAccountDecorator,
-    ExceptionInterceptor,
-    SuccessResponseDTO
-} from '@energyweb/origin-backend-utils';
+import { ExceptionInterceptor, SuccessResponseDTO } from '@energyweb/origin-backend-utils';
 import {
     Body,
     Controller,
@@ -21,7 +17,8 @@ import {
     UseInterceptors,
     HttpStatus,
     UsePipes,
-    ValidationPipe
+    ValidationPipe,
+    Query
 } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { ApiSecurity, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
@@ -59,11 +56,11 @@ export class CertificateBatchController {
         description: 'Returns whether the batch claim succeeded'
     })
     public async batchTransfer(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('fromAddress') fromAddress: string,
         @Body() { certificateAmounts, to }: BatchTransferCertificatesDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
-            new BatchTransferCertificatesCommand(certificateAmounts, to, blockchainAddress)
+            new BatchTransferCertificatesCommand(certificateAmounts, to, fromAddress)
         );
     }
 
@@ -76,11 +73,11 @@ export class CertificateBatchController {
         description: 'Returns whether the batch claim succeeded'
     })
     public async batchClaim(
-        @BlockchainAccountDecorator() blockchainAddress: string,
+        @Query('fromAddress') fromAddress: string,
         @Body() { certificateAmounts, claimData }: BatchClaimCertificatesDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
-            new BatchClaimCertificatesCommand(certificateAmounts, claimData, blockchainAddress)
+            new BatchClaimCertificatesCommand(certificateAmounts, claimData, fromAddress)
         );
     }
 }

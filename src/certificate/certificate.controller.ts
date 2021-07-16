@@ -121,12 +121,12 @@ export class CertificateController {
         description: 'Returns whether the transfer succeeded'
     })
     public async transfer(
-        @Query('blockchainAddress') blockchainAddress: string,
+        @Query('fromAddress') fromAddress: string,
         @Param('id', new ParseIntPipe()) certificateId: number,
         @Body() dto: TransferCertificateDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
-            new TransferCertificateCommand(certificateId, blockchainAddress, dto.to, dto.amount)
+            new TransferCertificateCommand(certificateId, fromAddress, dto.to, dto.amount)
         );
     }
 
@@ -139,12 +139,12 @@ export class CertificateController {
         description: 'Returns whether the claim succeeded'
     })
     public async claim(
-        @Query('blockchainAddress') blockchainAddress: string,
+        @Query('fromAddress') fromAddress: string,
         @Param('id', new ParseIntPipe()) certificateId: number,
         @Body() dto: ClaimCertificateDTO
     ): Promise<SuccessResponseDTO> {
         return this.commandBus.execute(
-            new ClaimCertificateCommand(certificateId, dto.claimData, blockchainAddress, dto.amount)
+            new ClaimCertificateCommand(certificateId, dto.claimData, fromAddress, dto.amount)
         );
     }
 
