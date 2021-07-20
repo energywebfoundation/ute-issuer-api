@@ -35,10 +35,7 @@ Other configuration variables
 ```
 PORT:                                           <PORT to which nest application start listening>
 BACKEND_PORT:                                   <Same as PORT>
-BACKEND_URL:                                    <URL on which this application will be available for e.g https://origin-api-canary.herokuapp.com>
 BLOCKCHAIN_EXPLORER_URL:                        <For e.g for Volta network https://volta-rpc-origin-0a316ab339e3d2ee3.energyweb.org>
-DEPLOY_KEY:                                     <Private key used for Issuer contracts deployment>
-ISSUER_ID:                                      <Name of the external device id type used in the issuance process for e.g Issuer ID>
 WEB3:                                           <WEB3 provider url>
 ```
 
