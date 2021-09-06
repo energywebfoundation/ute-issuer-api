@@ -1,6 +1,6 @@
 import { PositiveBNStringValidator } from '@energyweb/origin-backend-utils';
-import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, Validate, ValidateIf, ValidateNested } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, Validate, ValidateNested } from 'class-validator';
 
 import { ClaimDataDTO } from '@energyweb/issuer-api';
 import { IntUnitsOfEnergy } from '../utils';
@@ -10,20 +10,18 @@ export class ClaimCertificateDTO {
         type: ClaimDataDTO,
         example: {
             beneficiary: 'Adam X',
-            address: 'Some St',
-            region: 'X',
-            zipCode: '1234',
+            location: 'Some St, X, 12345',
             countryCode: 'GB',
-            fromDate: '2021-03-01T04:00:00.000Z',
-            toDate: '2021-04-01T04:00:00.000Z'
+            periodStartDate: '2021-03-01T04:00:00.000Z',
+            periodEndDate: '2021-04-01T04:00:00.000Z',
+            purpose: 'Claiming'
         }
     })
-    @IsOptional()
     @ValidateNested()
-    claimData?: ClaimDataDTO;
+    claimData: ClaimDataDTO;
 
-    @ApiProperty({ type: String, required: false, example: '10000000' })
-    @ValidateIf((dto: ClaimCertificateDTO) => !!dto.amount)
+    @ApiPropertyOptional({ type: String, required: false, example: '10000000' })
+    @IsOptional()
     @Validate(PositiveBNStringValidator)
     @Validate(IntUnitsOfEnergy)
     amount?: string;
