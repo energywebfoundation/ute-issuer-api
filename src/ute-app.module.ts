@@ -37,7 +37,7 @@ const OriginAppTypeOrmModule = () => {
 @Module({
     imports: [
         OriginAppTypeOrmModule(),
-        ConfigModule,
+        ConfigModule.forRoot(),
         CertificateModule,
         BlockchainPropertiesModule,
         CqrsModule,
