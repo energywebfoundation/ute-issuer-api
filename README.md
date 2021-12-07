@@ -85,3 +85,13 @@ Also it can be retrieved by `heroku auth:token` command
     6.1. Specify platform for image (e.g. `FROM --platform=linux/amd64 node:14-alpine`)
     6.2. Specify migration run before main process (e.g. `CMD ["/bin/bash","-c", "yarn typeorm:migrate && /project/ute-issuer-api/bin/ute-issuer-api"]`)
 
+## Docker
+
+If you want to use UTE Issuer API in a dockerized approach, you can:
+
+1. Integrate the `Dockerfile` into your Docker workflow
+2. Use `docker-compose.yml` to automatically build and run the UTE Issuer API along with a Postgres instance. Then:
+  - Build: `docker-compose -p ute build`
+  - Run: `docker-compose -p ute up -d`
+
+_Note: If you are using docker-compose, make sure that `DB_HOST=postgres` in your `.env` file._
