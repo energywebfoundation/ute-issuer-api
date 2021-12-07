@@ -14,3 +14,19 @@ services:
       POSTGRES_DB: ute-issuer
     ports:
       - "5432:5432"
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    ports:
+      - "8545:8545"
+    entrypoint:
+      - node
+      - /app/ganache-core.docker.cli.js
+      - --mnemonic
+      - 'chalk park staff buzz chair purchase wise oak receive avoid avoid home'
+      - -l
+      - '8000000'
+      - -a
+      - '20'
+      - -e
+      - '1000000'
+      - --debug

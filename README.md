@@ -94,4 +94,4 @@ If you want to use UTE Issuer API in a dockerized approach, you can:
   - Build: `docker-compose -p ute build`
   - Run: `docker-compose -p ute up -d`
 
-_Note: If you are using docker-compose, make sure that `DB_HOST=postgres` in your `.env` file._
+_Note: If you are using docker-compose, make sure that `DB_HOST=postgres` and `WEB3=http://ganache:8545` (if you are using Ganache) in your `.env` file._
