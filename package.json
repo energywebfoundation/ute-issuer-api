@@ -21,7 +21,8 @@
         "typeorm:run": "yarn typeorm migration:run",
         "typeorm:drop": "yarn typeorm schema:drop",
         "precommit": "lint-staged",
-        "test": "echo \"Implement tests\""
+        "docker:build": "docker-compose -p ute build",
+        "docker:run": "docker-compose down && docker-compose -p ute up -d"
     },
     "engines": {
         "node": "14"

@@ -1,6 +1,9 @@
+import dotenv from 'dotenv';
+
 import { LoggerService } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 import { UteAppModule } from './ute-app.module';
 
 function getPort(): number {
@@ -8,6 +11,8 @@ function getPort(): number {
 }
 
 export async function startAPI(logger?: LoggerService): Promise<void> {
+    dotenv.config({ path: '../.env' });
+
     const PORT = getPort();
     console.log(`UTE issuer backend starting on port: ${PORT}`);
 
