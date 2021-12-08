@@ -45,9 +45,7 @@ DATABASE_URL  - postgres://{user}:{password}@{host}:{port}/{database}
 Other configuration variables
 
 ```
-PORT:                                           <PORT to which nest application start listening>
-BACKEND_PORT:                                   <Same as PORT>
-BLOCKCHAIN_EXPLORER_URL:                        <For e.g for Volta network https://volta-rpc-origin-0a316ab339e3d2ee3.energyweb.org>
+BACKEND_PORT:                                           <PORT to which nest application start listening>
 WEB3:                                           <WEB3 provider url>
 ```
 
@@ -62,40 +60,7 @@ docker run --name origin-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 
 
 Swagger endpoint can be found at
 
-`http://localhost:3033/api`
-
-### Deploy to Heroku
-
-1. Create app in Heroku
-```
-heroku create <app_name>
-```
-
-2. Add Postgres plugin
-
-Go to `https://dashboard.heroku.com/apps/<app_name>`, click `Configure Add-ons`, select Heroku Postgres
-
-3. Deploy to Heroku
-
-```
-HEROKU_API_KEY=<key> HEROKU_STABLE_APP_API=ute-issuer-api-stable yarn deploy:heroku
-```
-
-By default `HEROKU_API_KEY` is set in .netrc when you authorize with `heroku` login
-Also it can be retrieved by `heroku auth:token` command
-
-
-### Tips on development
-
-1. Create a repo
-2. Create App Module, import all required modules
-3. Make changes accordingly to your requirements
-4. Add github action if needed
-5. Add migrations if required
-    5.1. Create blockchain properties if required 
-6. Prepare Dockerfile:
-    6.1. Specify platform for image (e.g. `FROM --platform=linux/amd64 node:14-alpine`)
-    6.2. Specify migration run before main process (e.g. `CMD ["/bin/bash","-c", "yarn typeorm:migrate && /project/ute-issuer-api/bin/ute-issuer-api"]`)
+`http://localhost:3030/swagger`
 
 ## Docker
 
