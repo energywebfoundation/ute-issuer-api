@@ -12,7 +12,9 @@
 
 ## Development
 
-`yarn start` to start the origin backend and exchange as one application Note: this will not run the migrations for origin-backend and exchange.
+1. `yarn` - Installs the package dependencies
+2. `yarn build` - Builds the packages
+3. `yarn start` - Starts the UTE backend
 
 Default TypeOrm configuration requires running PostgreSQL database. The detailed config with .env parameters is:
 
