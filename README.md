@@ -10,10 +10,20 @@
 
 **ute-issuer-api** package provides is a runner for a nest.js application that consist of **Origin Issuer API** packages.
 
+## Versions
+
+Tested and working with the following package versions:
+
+- `yarn`: 1.22.10
+- `node`: 14.15.5
+- `docker`: 20.10.8
+- `docker-compose`: 1.29.2
+
 ## Development
 
 1. `yarn` - Installs the package dependencies
 2. `yarn build` - Builds the packages
+3. `yarn migrate` - Deploy all the contracts necessary for the app to work
 3. `yarn start` - Starts the UTE backend
 
 Default TypeOrm configuration requires running PostgreSQL database. The detailed config with .env parameters is:
