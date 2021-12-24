@@ -44,7 +44,7 @@ export class AccountService {
             await fillUpTx.wait();
         }
 
-        const registryWithSigner = IssuerContracts.factories.RegistryFactory.connect(
+        const registryWithSigner = IssuerContracts.factories.RegistryExtendedFactory.connect(
             registry,
             new Wallet(newAccount.privateKey, provider)
         );
